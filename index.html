@@ -49,6 +49,12 @@ h3{font-size:21px;font-weight:700}
 .tag{color:var(--blue);font-weight:600;font-size:15px}
 .card p{margin:0;color:var(--mut);font-size:15px}
 .more{margin-top:auto;padding-top:8px;font-weight:700;color:var(--red)}
+.dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:10px}
+.dlr{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);text-decoration:none}
+.dlr:hover,.dlr:focus-visible{border-color:var(--blue);outline:none}
+.dlr span{display:flex;flex-direction:column}.dlr small{color:var(--mut);font-size:14px}
+.dlr em{font-style:normal;font-weight:700;color:var(--blue);white-space:nowrap}
+.dlr em::before{content:"\2193  "}
 .foot{background:var(--deep);color:#fff}
 .foot p{margin:4px 0;opacity:.9}
 .foot a{color:#fff}
@@ -94,6 +100,7 @@ ul.feat li{margin:0 0 6px}
     </div>
   </header>
   <main id="shelves"></main>
+  <section class="band shelf" id="downloads"><div class="wrap"><h2>Download the brochures</h2><p>Each brochure as a PDF, ready to save, share or print.</p><div class="dl" id="dl"></div></div></section>
   <footer class="foot band">
     <div class="wrap">
       <h3>Centre for Development of Advanced Computing (C-DAC)</h3>
@@ -111,50 +118,51 @@ ul.feat li{margin:0 0 6px}
 const FAM={paras:{n:'ParaS Ecosystem',d:'Write once, run on any CPU, GPU or AI accelerator: a SYCL 2020 compiler, a unified math library and a PyTorch backend that work together.'},
 pin:{n:'PINAKAA HPC & AI System Software',d:'Everything needed to build, use, profile and run an HPC facility, from the software stack to the developer IDE and the admin console.'}};
 const P=[
-{id:'paras-compiler',f:'paras',img:'paras',name:'ParaS Compiler',tag:'Code once, execute on all',
+{id:'paras-compiler',pdf:'ParaS_Compiler_Brochure.pdf',sz:'2.5 MB',f:'paras',img:'paras',name:'ParaS Compiler',tag:'Code once, execute on all',
 sum:'ParaS (sounds like paa-ruhs) is a compiler built on the SYCL 2020 specification. Developers write a single source that runs efficiently on CPUs and accelerators such as GPUs, AI chips and TPUs, without rewriting code per vendor.',
 facts:[['SYCL 2020','standard it builds on'],['Free','to use']],
 feat:['Source code portability across devices','Architecture independent and vendor neutral','Tuned for application performance','Base of the ParaS Ecosystem, with CLAP and Torch-ParaS'],
 gh:'https://github.com/ParaS-Ecosystem/ParaS-Compiler',mail:'paras@cdac.in'},
-{id:'clap',f:'paras',img:'clap',name:'CLAP',tag:'Single unified API across diverse backends',
+{id:'clap',pdf:'CLAP_Brochure.pdf',sz:'1.9 MB',f:'paras',img:'clap',name:'CLAP',tag:'Single unified API across diverse backends',
 sum:'A unified HPC math library giving BLAS, LAPACK, FFT, DNN and PDE capabilities through one stable interface. It calls the best vendor library underneath — OpenBLAS, Intel MKL, ArmPL, cuBLAS, rocBLAS, cuSOLVER, rocSOLVER, cuDNN, MIOpen and more.',
 facts:[['96.59%','native performance kept, LAMMPS ML-POD'],['6','platforms: 3 CPUs, 3 GPUs'],['≤ 1.5 s','fixed CLAP overhead']],
 feat:['One binary, three backends: LIB_BACKEND=CPU | CUDA | ROCM','Tested on NVIDIA V100 and H200, AMD MI300X, Intel Skylake, Arm Neoverse V2, AMD EPYC Gen4','Modular and extensible design','Performance portability across architectures'],
 gh:'https://github.com/ParaS-Ecosystem/CLAP-Library',mail:'paras@cdac.in'},
-{id:'torch-paras',f:'paras',img:'torch-paras',name:'Torch-ParaS',tag:'Run the same PyTorch model on GPUs and CPUs',
+{id:'torch-paras',pdf:'Torch-ParaS_Brochure.pdf',sz:'6.4 MB',f:'paras',img:'torch-paras',name:'Torch-ParaS',tag:'Run the same PyTorch model on GPUs and CPUs',
 sum:'A PyTorch backend for AI applications: one program for AMD and NVIDIA data-centre GPUs and x86, Arm and RISC-V CPUs, with no change to the model. Proven on BharatGen’s 17-billion-parameter Param2-17B language model.',
 facts:[['6.9×','faster text generation, AMD GPU'],['6.7×','faster text generation, NVIDIA GPU'],['55%','less GPU energy when serving']],
 feat:['73% fewer GPU-hours to serve 64 users','16% fewer GPU-hours to train the model','Model answers stay the same as standard PyTorch','Keep one version of your software, pick the hardware'],
 gh:'https://github.com/ParaS-Ecosystem/Framework-Torch-ParaS',mail:'paras@cdac.in'},
-{id:'pinakaa-studio',f:'pin',img:'pinakaa',name:'PINAKAA Studio',tag:'Production-ready HPC & AI software stack',
+{id:'pinakaa-studio',pdf:'PINAKAA_Studio_Brochure.pdf',sz:'4.3 MB',f:'pin',img:'pinakaa',name:'PINAKAA Studio',tag:'Production-ready HPC & AI software stack',
 sum:'C-DAC’s exascale-ready, modular suite for building, integrating and deploying HPC and AI environments on heterogeneous hardware. Studio defines the reference stack, Builder automates its lifecycle, and the result is a validated, versioned PINAKAA Stack.',
 facts:[['10','lifecycle stages, submit to feedback'],['x86 · Arm · RISC-V','plus GPUs and XPUs']],
 feat:['Reproducible Spack builds with versioned specs','Automated GitLab CI/CD with build-cache reuse','Native or Apptainer container delivery','Smoke, numerical, MPI, GPU, STREAM/HPL and regression tests','Gatekeeper approval, licence and provenance review','In use on the PARAM Kaveri supercomputer'],
 mail:'pinakaa@cdac.in'},
-{id:'parade',f:'pin',img:'parade',name:'ParaDE',tag:'Build parallel applications in your browser',
+{id:'parade',pdf:'ParaDE_Brochure.pdf',sz:'3.0 MB',f:'pin',img:'parade',name:'ParaDE',tag:'Build parallel applications in your browser',
 sum:'A Parallel Development Environment giving browser access to an HPC cluster: log in and use all its software and libraries, with nothing to install. Design or import projects, then compile, debug, package and convert code in one place.',
 facts:[['0','installs on your machine'],['NSM','deployed on national HPC facilities']],
 feat:['Python, C, C++ and Fortran with OpenMP, MPI, CUDA, OpenACC and SYCL','Automatic virtual environments for AI/ML','One-click jobs through Slurm and Flux','Debuggers, profilers and source converters in one window','Download projects with cluster-ready Makefiles','For students, novice and expert developers'],
 mail:'pinakaa@cdac.in'},
-{id:'c-hap',f:'pin',img:'chap',name:'C-HAP',tag:'HPC Application Profiler',
+{id:'c-hap',pdf:'C-HAP_Brochure.pdf',sz:'0.9 MB',f:'pin',img:'chap',name:'C-HAP',tag:'HPC Application Profiler',
 sum:'Performance analysis for HPC applications through a web interface, with no command-line job scripts. Find hotspots and bottlenecks, study application- and node-level behaviour, and get suggestions on compilation options.',
 facts:[['5','dimensions: execution, memory, communication, I/O, power']],
 feat:['Application performance summary: time, processes, architecture','Guided profiling down to processes and threads','Hotspot identification per process','Suggestions such as vectorisation and data-structure fixes','Minimal profiling overhead','Submits jobs directly through SLURM'],
 mail:'pinakaa@cdac.in'},
-{id:'suparikshan',f:'pin',img:'suparikshan',name:'SuParikshan',tag:'HPC monitoring and management',
+{id:'suparikshan',pdf:'SuParikshan_Brochure.pdf',sz:'1.7 MB',f:'pin',img:'suparikshan',name:'SuParikshan',tag:'HPC monitoring and management',
 sum:'Helps system administrators, facility managers and stakeholders keep HPC clusters healthy. A visual interface finds and resolves problems in compute, storage, network, power and jobs before they hurt long-running work.',
 facts:[['CPU · GPU · FPGA','heterogeneous clusters'],['Intel · AMD · IBM · Arm','vendor-agnostic']],
 feat:['Automatic error identification and ticketing','Monitoring with admins’ own custom scripts','Accounting of cluster resources and users','Health and performance reports','Low footprint, responsive design','Used across NSM HPC facilities and academic centres'],
 mail:'nsmss@cdac.in'}];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=id=>document.getElementById(id);
-$('jump').innerHTML=P.map(p=>`<a href="#${p.id}">${esc(p.name)}</a>`).join('');
+$('jump').innerHTML=P.map(p=>`<a href="#${p.id}">${esc(p.name)}</a>`).join('')+`<a href="#downloads">Download brochures ↓</a>`;
 const n=P.length;
 $('rack').innerHTML=P.map((p,i)=>{const a=(i-(n-1)/2)*9,x=(i-(n-1)/2)*11;return `<a href="#${p.id}" style="transform:translateX(calc(-50% + ${x}%*1.7)) rotate(${a}deg);z-index:${i<n/2?i:n-i}" aria-label="${esc(p.name)} brochure"><img src="assets/${p.img}_t.jpg" alt=""></a>`}).join('');
 $('shelves').innerHTML=Object.entries(FAM).map(([k,f])=>`<section class="band shelf"><div class="wrap"><h2>${esc(f.n)}</h2><p>${esc(f.d)}</p><div class="grid">${P.filter(p=>p.f===k).map(p=>`<a class="card" href="#${p.id}"><div class="th"><img src="assets/${p.img}_t.jpg" alt="${esc(p.name)} brochure cover" loading="lazy"></div><div class="bd"><h3>${esc(p.name)}</h3><div class="tag">${esc(p.tag)}</div><p>${esc(p.sum.split('. ')[0])}.</p><span class="more">Open brochure →</span></div></a>`).join('')}</div></div></section>`).join('');
+$('dl').innerHTML=P.map(p=>`<a class="dlr" href="assets/pdf/${p.pdf}" download><span><b>${esc(p.name)}</b><small>${esc(p.tag)}</small></span><em>PDF · ${p.sz}</em></a>`).join('');
 function show(){
   const id=location.hash.slice(1),i=P.findIndex(p=>p.id===id);
-  if(i<0){document.body.classList.remove('prod');$('view').innerHTML='';return}
+  if(i<0){document.body.classList.remove('prod');$('view').innerHTML='';const t=id&&document.getElementById(id);if(t&&id!=='view')t.scrollIntoView();else window.scrollTo(0,0);return}
   const p=P[i],pr=P[(i+n-1)%n],nx=P[(i+1)%n];
   $('view').innerHTML=`<div class="bar"><div class="wrap"><a class="btn" href="#all">← All products</a><a class="btn" href="#${pr.id}">‹ ${esc(pr.name)}</a><a class="btn" href="#${nx.id}">${esc(nx.name)} ›</a></div></div>
   <section class="band"><div class="wrap pv"><div>
@@ -162,7 +170,7 @@ function show(){
     <p class="sum">${esc(p.sum)}</p>
     <div class="facts">${p.facts.map(f=>`<div class="fact"><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join('')}</div>
     <h3 style="margin-bottom:10px">Highlights</h3><ul class="feat">${p.feat.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
-    <div class="links">${p.gh?`<a class="btn pri" href="${p.gh}">Source code on GitHub</a>`:''}<a class="btn" href="mailto:${p.mail}">Email ${esc(p.mail)}</a></div>
+    <div class="links"><a class="btn pri" href="assets/pdf/${p.pdf}" download>Download brochure (PDF, ${p.sz})</a>${p.gh?`<a class="btn" href="${p.gh}">Source code on GitHub</a>`:''}<a class="btn" href="mailto:${p.mail}">Email ${esc(p.mail)}</a></div>
     <p class="contact">Queries, feedback and collaboration: <b>${esc(p.mail)}</b> · <span style="white-space:nowrap">+91-80-2509-3400</span></p>
   </div><div><div class="paper" id="paper" role="button" tabindex="0" aria-label="Zoom brochure"><img src="assets/${p.img}.jpg" alt="${esc(p.name)} brochure"></div><p class="hint">Tap the brochure to zoom in or out.</p></div></div></section>`;
   document.body.classList.add('prod');window.scrollTo(0,0);
